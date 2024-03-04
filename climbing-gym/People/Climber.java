@@ -1,5 +1,6 @@
 package People;
 import Gym.*;
+import Technical.DateHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,28 +39,27 @@ public class Climber extends Person implements ClimbBoulder
         this.totalAscents++;
     }
 
-    //TODO make a separate method which asks for a date if its the first ascent
+
     public void climb(String id){
         if(this.getGym().boulderExistsInGym(id)){
             Boulder boulderBeingClimbed = this.getGym().findBoulderByID(id);
 
             if(boulderHasBeenAscended(id)){
-                this.ascentList.get(id).addAscent();
+                this.getAscentList().get(id).addAscent();
             } else {
                 Scanner scanner = new Scanner(System.in);
                 System.out.println("Dette er " + this.getName() + " sin første bestigning av denne " +
                         "bulderen!\nSkriv vennligst når denne ble bestiget (YYYY-MM-DD): ");
-                String rawDate = scanner.nextLine();
-                if()
-                this.ascentList.put(id, new Ascent(this, boulderBeingClimbed));
-                this.ascentList.get(id).setFirstAscentDateByString(rawDate);
+                this.getAscentList().put(id, new Ascent(this, boulderBeingClimbed));
+                DateHandler dateHandler = new DateHandler();
+                dateHandler.passDateInput(id, scanner, this);
+
             }
             boulderBeingClimbed.addAscent();
             this.addAscentToTotal();
         } else {
             System.out.println( id + " bulderen finnes ikke gymmen til personen.");
         }
-
     }
 
     public void listClimbs(){

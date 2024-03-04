@@ -1,5 +1,5 @@
 package People;
-import Gym.idCreator;
+import Technical.idCreator;
 public abstract class Person implements idCreator {
     private static int previousId = 1;
     private final String personId;

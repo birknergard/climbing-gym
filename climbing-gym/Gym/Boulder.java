@@ -1,5 +1,7 @@
 package Gym;
 
+import Technical.idCreator;
+
 public abstract class Boulder implements idCreator
 {
     private static int previousId;

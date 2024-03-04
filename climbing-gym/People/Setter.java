@@ -1,8 +1,9 @@
 package People;
 
 import Gym.*;
+import Technical.idCreator;
+
 import java.util.HashMap;
-import java.util.Map;
 
 public class Setter extends Climber implements BoulderManager, idCreator
 {

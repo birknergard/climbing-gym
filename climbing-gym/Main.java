@@ -1,6 +1,7 @@
 import Gym.Gym;
 import People.Climber;
 import People.Setter;
+import Technical.InteractionManager;
 
 public class Main
 {

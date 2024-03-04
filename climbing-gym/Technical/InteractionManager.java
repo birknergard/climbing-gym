@@ -1,3 +1,5 @@
+package Technical;
+
 import Gym.*;
 import People.*;
 

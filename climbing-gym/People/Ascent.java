@@ -1,7 +1,9 @@
 package People;
 import Gym.*;
+import Technical.DateHandler;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Ascent
 {
@@ -33,38 +35,13 @@ public class Ascent
         return firstAscentDate;
     }
 
-    private boolean isMonthValid(int month){
-       return month <= 12 && month >= 1;
-    }
-
-    public static boolean isDateValid(int month, int day){
-        if(isMonthValid(month)){
-            if (month == 2) {
-                return day <= 29 && 1 <= day;
-            }
-            if (month % 2 == 0) {
-                return day <= 30 && day >= 1;
-            } else {
-                return day <= 31 && day >= 1;
-            }
-        }
-    }
 
     // Handle cases where an invalid date or month is inputted.
-    private LocalDate formatDateByString(String rawDate){ //Format required: YYYY-MM-DD
-        String[] parts = rawDate.split("-");
-        int year = Integer.parseInt(parts[0]);
-        int month = Integer.parseInt(parts[1]);
-        int day = Integer.parseInt(parts[2]);
+    public void setFirstAscentDate(ArrayList<Integer> list){
+        DateHandler dateHandler = new DateHandler();
+        this.firstAscentDate = dateHandler.returnDateFromList(list);
+    }
 
-        return LocalDate.of(year,month,day);
-    }
-    public void setFirstAscentDateByString(String rawDate){
-        this.firstAscentDate = formatDateByString(rawDate);
-    }
-    public void setFirstAscentDate(int y, int m, int d){
-        this.firstAscentDate = LocalDate.of(y,m,d);
-    }
 
     public int getAscentCount() {
         return count;
