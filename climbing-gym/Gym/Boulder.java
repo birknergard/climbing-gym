@@ -7,29 +7,61 @@ public abstract class Boulder implements idCreator
     private static int previousId;
     private final String boulderId;
     private Grade grade;
-    private int ascents;
+    private int ascentCount;
     private final String setterName;
     private final int angle;
+
+    enum BoulderType{
+        Slab, Overhang, Vertical
+    }
+
+    private class Grade{
+        private String grade;
+
+        public Grade(){
+            this.grade = "V0";
+        }
+        public Grade(int number){
+            if(number >= 0 && number < 18){
+                this.grade = "V" + number;
+            } else {
+                System.out.println("V" + number + " is is not a valid grade on the V-scale.");
+            }
+
+        }
+        public String getGrade(){
+            return this.grade;
+        }
+
+        public void setGrade(String grade) {
+            this.grade = grade;
+        }
+
+        @Override
+        public String toString(){
+            return grade;
+        }
+    }
 
  Boulder(int gradeByInt, String setter, int angle){
      this.grade = new Grade(gradeByInt);
      this.setterName = setter;
-     this.ascents = 0;
+     this.ascentCount = 0;
      this.angle = angle;
-     this.boulderId = createId("B");
+     this.boulderId = createId("B", previousId);
      System.out.println("Boulder created with ID: " + boulderId);
      previousId++;
  }
  Boulder(){
      this.grade = new Grade();
      this.setterName = "Unknown";
-     this.ascents = 0;
+     this.ascentCount = 0;
      this.angle = 10;
-     this.boulderId = createId("B");
+     this.boulderId = createId("B", previousId);
      previousId++;
      System.out.println("Boulder created with ID: " + boulderId);
  }
-    public String createId(String prefix){
+    public String createId(String prefix, int staticNumber){
      return prefix + previousId;
     }
 
@@ -37,12 +69,12 @@ public abstract class Boulder implements idCreator
         return boulderId;
     }
 
-    public int getAscents() {
-        return ascents;
+    public int getAscentCount() {
+        return ascentCount;
     }
 
-    public Grade getGrade() {
-        return grade;
+    public String getGrade() {
+        return this.grade.getGrade();
     }
 
     public String getSetterName() {
@@ -53,11 +85,11 @@ public abstract class Boulder implements idCreator
     }
 
     public void addAscent(){
-     this.ascents += 1;
+     this.ascentCount += 1;
     }
 
-    public void setAscents(int value){
-     this.ascents = value;
+    public void setAscentCount(int value){
+     this.ascentCount = value;
     }
 
     public void setGradeByInt(int value){
@@ -70,7 +102,7 @@ public abstract class Boulder implements idCreator
 
     @Override
     public String toString(){
-     return "; " + this.getGrade() + "; ASC: " + this.getAscents();
+     return "; " + this.getGrade() + "; " + this.getAscentCount()+ " ascents; ";
     }
 
 }

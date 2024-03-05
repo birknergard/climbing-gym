@@ -4,19 +4,16 @@ import People.Climber;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class DateHandler
+public class DateHandler implements SetFirstAscentDate
 {
-    // Skal ta inn en string med format (YYYY-MM-DD)
-    // og lagre det i et LocalDate format, som da kan spyttes ut.
 
     public LocalDate returnDateFromList(ArrayList<Integer> list){
         return LocalDate.of(list.get(0), list.get(1), list.get(2));
     }
 
-    public void passDateInput(String id, Scanner scanner, Climber person){
+    public void setAscentDateByUserInput(String id, Scanner scanner, Climber person){
         while(true) {
             String rawDate = scanner.nextLine();
             ArrayList<Integer> dateArray = fetchDateByString(rawDate);

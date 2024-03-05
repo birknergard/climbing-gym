@@ -7,6 +7,10 @@ import java.util.ArrayList;
 
 public class Ascent
 {
+    /**
+     * This class manages an individual climber's ascent of a specific boulder problem.
+     * For each subsequent climb of the boulder the count is increased.
+     */
     private final Climber climber;
     private final Boulder boulder;
     private LocalDate firstAscentDate;

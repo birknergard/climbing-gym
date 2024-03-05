@@ -9,7 +9,7 @@ public class InteractionManager implements StateHandler
 {
 
     //# Fields
-    private Climber user;
+    private static Climber user;
     private final static Scanner input;
     private static int state;
 
@@ -19,11 +19,14 @@ public class InteractionManager implements StateHandler
         input = new Scanner(System.in);
         state = 0;
     }
+    public void setTemporaryUser(Gym gym){
+        setUser(new Climber(gym));
+    }
     private Climber getUser(){
         return user;
     }
-    public void setUser(Climber user){
-        this.user = user;
+    public void setUser(Climber newUser){
+        user = newUser;
     }
     private static void printLine(){
         System.out.println("------");
@@ -39,10 +42,13 @@ public class InteractionManager implements StateHandler
                 execute(this.getUser().getGym());
             case 2:
                 chooseClimber(this.getUser().getGym());
+            case 2_1:
+                createUser(getUser().getGym());
             case 3:
                 chooseBoulder();
             case 4:
                 climbCompleted();
+
         }
     }
     public void execute(Gym gym){
@@ -81,6 +87,7 @@ public class InteractionManager implements StateHandler
             System.out.println("Choose a climber from the list below");
             gym.printClimbers();
             System.out.println("Write the id corresponding to the person you choose.");
+            System.out.println("Alternatively you can write 'new' in order to create your own user. :)");
             printLine();
         }
         String userInput = input.nextLine();
@@ -91,6 +98,8 @@ public class InteractionManager implements StateHandler
         } else if(userInput.equals("exit")) {
             System.out.println("Exiting program ...");
             System.exit(0);
+        } else if(userInput.equals("new")){
+            setProgramState(2_1);
         } else {
             System.out.println("Invalid ID, please try again.");
             setProgramState(2);
@@ -155,6 +164,72 @@ public class InteractionManager implements StateHandler
             System.exit(0);
         }
     }
+
+    public void createUser(Gym gym){
+        changeState(2_1);
+        clearScreen();
+        System.out.println("Please write your full name.");
+        System.out.println("------");
+        String name = input.nextLine();
+        if(name.isEmpty()){
+
+        }
+
+        clearScreen();
+        System.out.println("Please write your phonenumber. (or just press enter)");
+        System.out.println("------");
+        String phoneNumber;
+        String buffer = input.nextLine();
+        if (buffer.equals("")){
+            phoneNumber = "Unknown";
+        } else {
+            phoneNumber = buffer;
+        }
+
+        clearScreen();
+        System.out.println("Does this look correct?");
+        System.out.println("------");
+        System.out.println("Name: " + name);
+        System.out.println("Phonenumber: " + phoneNumber);
+        System.out.println("------");
+        System.out.println("Yes/No?");
+
+        buffer = input.nextLine();
+
+        if(buffer.equals("yes")){
+            System.out.println("In this program it is possible to create your own boulders if you are a setter.");
+            System.out.println("Keep in mind that you need to enter the right password in order to set yourself as a setter.");
+            System.out.println("Are you a climber or a setter?");
+            System.out.println("------");
+            buffer = input.nextLine();
+            if(buffer.equals("setter")){
+                String password = "edamame";
+
+                System.out.println("Enter password:");
+                buffer = input.nextLine();
+                if(passwordIsCorrect(buffer)){
+                    System.out.println("Password correct! Creating setter ...");
+                    setUser(new Setter(name, phoneNumber, gym));
+                } else {
+                    System.out.println("Password incorrect. Creating climber ...");
+                    setUser(new Climber(name, phoneNumber, gym));
+                }
+
+            } else if(buffer.equals("climber")) {
+                setUser(new Climber(name, phoneNumber, gym));
+            }
+        } else {
+            setProgramState(2_1);
+        }
+        setProgramState(2);
+
+        }
+
+    private boolean passwordIsCorrect(String input){
+        String pass = "edamame";
+        return input.equals(pass);
+    }
+
     private static void clearScreen() {
         for (int i = 0; i < 30; i++) {
             System.out.println();

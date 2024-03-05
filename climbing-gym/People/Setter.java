@@ -1,13 +1,12 @@
 package People;
 
 import Gym.*;
-import Technical.idCreator;
 
 import java.util.HashMap;
+import java.util.Map;
 
-public class Setter extends Climber implements BoulderManager, idCreator
+public class Setter extends Climber implements BoulderManager
 {
-    // TODO Make method which prints list of boulders for each setter
     private static int previousId = 1;
     private HashMap<String, Boulder> bouldersSet;
     private final String employeeId;
@@ -16,15 +15,11 @@ public class Setter extends Climber implements BoulderManager, idCreator
     public Setter(String name, String phoneNumber, Gym gym){
       super(name, phoneNumber, gym);
       this.bouldersSet = new HashMap<>();
-      this.employeeId = createId("S");
+      this.employeeId = createId("S", previousId);
       previousId++;
 
       this.getGym().getEmployeeList().put(this.employeeId, this);
 
-    }
-
-    public String createId(String prefix){
-        return prefix + previousId;
     }
 
     public HashMap<String, Boulder> getBouldersSet() {
@@ -59,5 +54,10 @@ public class Setter extends Climber implements BoulderManager, idCreator
     public void modifyGrade(Boulder boulder, int newGrade){
         System.out.println(this.getName() + "changed the grade from " + boulder.getGrade() + " to V" + newGrade + "!");
         boulder.setGradeByInt(newGrade);
+    }
+    public void printBouldersSet(){
+       for(Map.Entry<String, Boulder> entry : this.getBouldersSet().entrySet()) {
+           System.out.println(entry.getValue().getBoulderId() + " -> " + entry.getValue() + " - set by " + entry.getValue().getSetterName());
+       }
     }
 }

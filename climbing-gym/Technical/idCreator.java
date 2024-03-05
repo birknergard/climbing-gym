@@ -2,6 +2,6 @@ package Technical;
 
 public interface idCreator
 {
-    String createId(String prefix);
+    String createId(String prefix, int staticNumber);
 
 }

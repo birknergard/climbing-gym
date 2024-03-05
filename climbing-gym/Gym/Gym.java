@@ -6,28 +6,39 @@ import java.util.Map;
 
 public class Gym
 {
-    private String name;
-    private String location;
+    class Info {
+        private final String name;
+        private final String location;
+
+        Info(String name, String location){
+            this.name = name;
+            this.location = location;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public String getLocation() {
+            return this.location;
+        }
+
+    }
+    private final Info info;
     private HashMap<String, Climber> climberList;
     private HashMap<String, Setter> employeeList;
     private HashMap<String, Boulder> bouldersInGym;
 
     public Gym(String name, String location){
-        this.name = name;
-        this.location = location;
+        this.info = new Info(name, location);
         this.climberList = new HashMap<>();
         this.employeeList = new HashMap<>();
         this.bouldersInGym = new HashMap<>();
     }
 
-    public String getName() {
-        return this.name;
+    private Info getGymInfo(){
+        return this.info;
     }
-
-    public String getLocation() {
-        return this.location;
-    }
-
     public HashMap<String, Boulder> getBouldersInGym() {
         return this.bouldersInGym;
     }
@@ -57,7 +68,7 @@ public class Gym
     }
 
     public void printBoulders(){
-        System.out.println("Boulders at " + this.getName() + ", " + this.getLocation());
+        System.out.println("Boulders at " + this.info.getName() + ", " + this.info.getLocation());
         for(Map.Entry<String, Boulder> entry : this.bouldersInGym.entrySet()){
             System.out.println(entry.getKey() + " - "
                     + entry.getValue() + ". Set by "
@@ -66,7 +77,7 @@ public class Gym
         System.out.println("------");
     }
     public void printSetters(){
-        System.out.println("Setters at " + this.getName() + ", " + this.getLocation());
+        System.out.println("Setters at " + this.getGymInfo().getName() + ", " + this.getGymInfo().getLocation());
         for(Map.Entry<String, Setter> entry : this.getEmployeeList().entrySet()){
             System.out.println(entry.getKey() + " - "
                     + entry.getValue().getName() + " : "
@@ -76,7 +87,7 @@ public class Gym
     }
 
     public void printClimbers(){
-        System.out.println("Climbers at " + this.getName() + ", " + this.getLocation());
+        System.out.println("Climbers at " + this.getGymInfo().getName() + ", " + this.getGymInfo().getLocation());
         for(Map.Entry<String, Climber> entry : this.getClimberList().entrySet()){
             System.out.println(entry.getKey() + " - "
                     + entry.getValue().getName() + " : "
