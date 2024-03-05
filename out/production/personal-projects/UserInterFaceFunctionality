@@ -1,0 +1,36 @@
+Navigation in this program is done by writing in terminal
+
+1. From start:
+-Welcome to the climbing gym-
+
+2. Choose a climber:
+-show list of boulders-
+choose climber from list by ID
+or
+create new climber(can create setter, but password is required)
+
+3. Do you want to climb or create boulders?
+
+climb
+or
+create
+
+#if climb
+
+4. Choose a boulder:
+-show list of boulders-
+
+choose boulder by ID
+
+register your climb
+
+keep climbing?
+yes/no
+
+#if yes go back to step 4
+
+#if no go back to step 3
+
+
+
+
