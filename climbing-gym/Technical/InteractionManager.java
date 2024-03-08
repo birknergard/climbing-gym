@@ -68,7 +68,7 @@ public class InteractionManager implements StateHandler
         }
 
         String userInput = input.nextLine();
-        if(userInput.equals("")){
+        if(userInput.isEmpty()){
             setProgramState(2);
         } else if(userInput.equals("exit")) {
             System.out.println("Exiting program ...");
@@ -115,7 +115,6 @@ public class InteractionManager implements StateHandler
             System.out.println("Hello " + getUser().getFirstName() + "!");
             System.out.println("Here is the list of boulders you can try.");
             this.getUser().getGym().printBoulders();
-            printLine();
             System.out.println("Please pick your boulder by writing its corresponding ID!");
             printLine();
         }
@@ -171,16 +170,23 @@ public class InteractionManager implements StateHandler
         System.out.println("Please write your full name.");
         System.out.println("------");
         String name = input.nextLine();
-        if(name.isEmpty()){
-
+        while(true) {
+            if(name.isEmpty()){
+                System.out.println("You need to write a name.");
+                System.out.println("------");
+                name = input.nextLine();
+            } else {
+                break;
+            }
         }
+
 
         clearScreen();
         System.out.println("Please write your phonenumber. (or just press enter)");
         System.out.println("------");
         String phoneNumber;
         String buffer = input.nextLine();
-        if (buffer.equals("")){
+        if (buffer.isEmpty()){
             phoneNumber = "Unknown";
         } else {
             phoneNumber = buffer;
@@ -193,6 +199,7 @@ public class InteractionManager implements StateHandler
         System.out.println("Phonenumber: " + phoneNumber);
         System.out.println("------");
         System.out.println("Yes/No?");
+        System.out.println("------");
 
         buffer = input.nextLine();
 
@@ -203,8 +210,6 @@ public class InteractionManager implements StateHandler
             System.out.println("------");
             buffer = input.nextLine();
             if(buffer.equals("setter")){
-                String password = "edamame";
-
                 System.out.println("Enter password:");
                 buffer = input.nextLine();
                 if(passwordIsCorrect(buffer)){

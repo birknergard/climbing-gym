@@ -25,9 +25,9 @@ public class Gym
 
     }
     private final Info info;
-    private HashMap<String, Climber> climberList;
-    private HashMap<String, Setter> employeeList;
-    private HashMap<String, Boulder> bouldersInGym;
+    private final HashMap<String, Climber> climberList;
+    private final HashMap<String, Setter> employeeList;
+    private final HashMap<String, Boulder> bouldersInGym;
 
     public Gym(String name, String location){
         this.info = new Info(name, location);
@@ -71,7 +71,7 @@ public class Gym
         System.out.println("Boulders at " + this.info.getName() + ", " + this.info.getLocation());
         for(Map.Entry<String, Boulder> entry : this.bouldersInGym.entrySet()){
             System.out.println(entry.getKey() + " - "
-                    + entry.getValue() + ". Set by "
+                    + entry.getValue() + " - Set by "
                     + entry.getValue().getSetterName());
         }
         System.out.println("------");
