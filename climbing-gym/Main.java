@@ -5,6 +5,7 @@ import Technical.InteractionManager;
 
 public class Main
 {
+    // TODO simplify the program in such a way that you can design a database to support it
     public static void main(String[] args) {
         InteractionManager program = new InteractionManager();
         Gym gym = new Gym("Bergen Klatresenter", "Laksevåg, Bergen");

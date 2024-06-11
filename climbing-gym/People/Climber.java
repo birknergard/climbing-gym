@@ -73,7 +73,6 @@ public class Climber extends Person implements ClimbBoulder
                 dateHandler.setAscentDateByUserInput(id, scanner, this);
 
             }
-            boulderBeingClimbed.addAscent();
             this.addAscentToTotal();
         } else {
             System.out.println( id + " bulderen finnes ikke gymmen til personen.");
